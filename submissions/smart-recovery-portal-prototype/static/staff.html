@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart-Recovery | Staff and audit view</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">LT</span> Smart-Recovery staff view (prototype)</div>
+      <a class="secure" href="index.html">Customer portal</a>
+    </div>
+  </header>
+  <main class="wrap wide">
+    <div id="alert" class="alert" role="alert" hidden></div>
+    <h1>Legacy database, representative queue and audit log</h1>
+    <p class="muted">Read-only view. The audit log is append-only and each record is chained to the previous one by hash.</p>
+
+    <h2>Accounts (legacy database)</h2>
+    <div class="panel table-wrap"><table id="accounts"><thead><tr>
+      <th>Account</th><th>Status</th><th>Overdue</th><th>Days</th><th>Portal eligible</th><th>Triage reasons</th><th>Locked</th><th>Promise to pay</th>
+    </tr></thead><tbody></tbody></table></div>
+
+    <h2>Representative queue</h2>
+    <div class="panel table-wrap"><table id="queue"><thead><tr>
+      <th>Case</th><th>Account</th><th>Queue</th><th>Priority</th><th>Reasons</th><th>Customer context</th><th>Created (UTC)</th>
+    </tr></thead><tbody></tbody></table></div>
+
+    <h2>Audit log (newest first)</h2>
+    <div class="panel table-wrap"><table id="audit"><thead><tr>
+      <th>#</th><th>Time (UTC)</th><th>Account</th><th>Event</th><th>Actor</th><th>Outcome</th><th>Detail</th><th>Hash</th>
+    </tr></thead><tbody></tbody></table></div>
+  </main>
+  <script src="mock-api.js"></script>
+  <script src="staff.js"></script>
+</body>
+</html>

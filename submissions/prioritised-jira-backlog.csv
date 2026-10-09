@@ -1,0 +1,221 @@
+Summary,Issue key,Issue id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project lead id,Project description,Priority,Resolution,Assignee,Assignee Id,Reporter,Reporter Id,Creator,Creator Id,Created,Updated,Last Viewed,Resolved,Due date,Votes,Description,Environment,Watchers,Watchers Id,Original estimate,Remaining Estimate,Time Spent,Work Ratio,Σ Original Estimate,Σ Remaining Estimate,Σ Time Spent,Security Level,Inward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Custom field (Development),Custom field (Issue color),Custom field (Rank),Custom field (Start date),Custom field (Team),Parent,Parent key,Parent summary,Status category,Status category changed,Story point estimate,MoSCoW
+Access & Verification,KAN-5,10004,Epic,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 1:17 PM,08/Oct/26 2:15 PM,07/Oct/26 1:28 PM,,,0,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|hzzzzz:,,,,,,To Do,07/Oct/26 1:17 PM,,
+Account Visibility,KAN-6,10005,Epic,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 1:17 PM,08/Oct/26 2:24 PM,,,,0,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i00000:,,,,,,To Do,07/Oct/26 1:17 PM,,
+PTP / Payment-plan journey,KAN-7,10006,Epic,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 1:18 PM,08/Oct/26 2:24 PM,,,,0,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i00008:,,,,,,To Do,07/Oct/26 1:18 PM,,
+Routing & Exception Handling,KAN-8,10007,Epic,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 1:18 PM,08/Oct/26 2:24 PM,,,,0,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0000b:,,,,,,To Do,07/Oct/26 1:18 PM,,
+Reporting & Audit Trail,KAN-9,10008,Epic,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Medium,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 1:18 PM,08/Oct/26 11:15 AM,,,,0,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0000c:,,,,,,To Do,07/Oct/26 1:18 PM,,
+"Customer identity verification (DOB, post code, card digits)",KAN-11,10010,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 1:27 PM,08/Oct/26 3:00 PM,07/Oct/26 5:22 PM,,,0,"* *User Story:* As a delinquent customer, I want to verify my identity on the web portal using my date of birth, post code and the last 4 digits of my registered payment card, so that I can securely access my overdue account details without waiting to speak with a representative.
+* *Business Value:* Enables secure 24/7 self-service while protecting customer data (GDPR). No account details are shown until verification passes.
+* *Acceptance Criteria:*
+** When an unauthenticated customer opens the portal, the verification screen asks for Date of Birth, Post Code and last 4 digits of the registered payment card and shows no account details.
+** When the customer submits all three fields, the portal validates them against the legacy database in real time.
+** When all three match, the customer proceeds to the hardship check (KAN-16) and then the Account Dashboard (KAN-12).
+** When any field does not match, a generic error is shown (it does not say which field was wrong), the customer can retry, and the failed-attempt count increases by one.
+** Every verification attempt (pass or fail) is written to the audit log (KAN-26) without storing the answers entered.
+** On the 3rd consecutive failed attempt the journey passes to KAN-14 (lockout and fallback); this story defines no lockout behaviour.
+* *Dependencies:* Read access to the legacy database; Compliance confirmation of the verification standard (BLOCKER, see Notes); KAN-26 audit logging.
+* *Priority:* Highest (Must-have): every other portal story needs a verified customer.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Static fields, not dynamic knowledge-based questions. The identity verification standard is NOT yet confirmed by Compliance, so the fields and attempt limits may change before build. Owner to be confirmed (see Phase 1 scope assumptions).",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,KAN-16,,,{},,0|i0000e:,,,10004,KAN-5,Access & Verification,To Do,07/Oct/26 1:27 PM,5,Must
+Account dashboard: overdue balance and repayment options,KAN-12,10011,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 2:32 PM,08/Oct/26 3:00 PM,08/Oct/26 12:36 PM,,,0,"* *User Story:* As a verified customer without a hardship flag, I want to see my current overdue balance, account status and the ways I can resolve it on one dashboard, so that I know what I owe and what I can do next.
+* *Business Value:* Gives customers transparency about what they owe and removes the need to phone for 'what do I owe / what was agreed' follow-ups. Baseline to validate: the Finance stakeholder reports customers call back about three times after a first call; the figure must be checked against the Discovery Dossier and recovery activity tracker before it is quoted in the ROI case.
+* *Acceptance Criteria:*
+** When a verified customer with no hardship flag (KAN-16) reaches the dashboard, it shows total overdue balance (GBP), product type (Personal Loan / Credit Card / Auto Finance), days overdue and current account status.
+** Balance and status are read live from the legacy database; if they cannot be read, an error message and the support number are shown instead of stale data.
+** The dashboard offers: Pay Overdue Balance in Full (KAN-20), Set Up Repayment Plan (KAN-18), Promise to Pay (KAN-19), Request Hardship Support / Dispute Balance (KAN-21) and View Transaction History (KAN-17).
+** Options that the account is not eligible for (KAN-22) are not displayed.
+* *Dependencies:* KAN-11 (verification); KAN-16 (hardship check); legacy database read access.
+* *Priority:* Highest (Must-have): entry point to every resolution journey.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Hardship-flag behaviour is owned by KAN-16 and is not repeated here. The earlier 'specialist callback form' is out of Phase 1 unless confirmed by Compliance.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,KAN-17,KAN-18,KAN-19,{},,0|i0000r:,,,10005,KAN-6,Account Visibility,To Do,07/Oct/26 2:32 PM,5,Must
+Failed verification lockout and fallback to representative,KAN-14,10013,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 4:16 PM,08/Oct/26 3:00 PM,08/Oct/26 12:35 PM,,,0,"* *User Story:* As a Compliance Liaison, I want the portal to lock access after 3 failed verification attempts and show a support number, so that customer data is protected from unauthorised access while genuine customers still have a route to help.
+* *Business Value:* Prevents credential guessing while giving struggling customers a human fallback.
+* *Acceptance Criteria:*
+** When verification fails 3 consecutive times for an account, portal login for that account is locked for 60 minutes.
+** At the same time the portal displays the representative support telephone number.
+** The case is placed in the representative queue for manual identity verification (KAN-27).
+** A locked customer who tries again sees the lock message and the support number, and no further attempts are accepted.
+** The lock lifts automatically after 60 minutes, or earlier when a representative resets it in the admin queue; both are written to the audit log (KAN-26).
+* *Dependencies:* KAN-11, KAN-26, KAN-27.
+* *Priority:* High (Must-have): security control required before go-live.
+* *Estimate:* 3 story points
+* *Notes & Assumptions:* This is the single owner of lockout behaviour; KAN-11 only hands over to it. Lock and phone-number display happen together, as in the To-Be workflow. The 60-minute duration is to be confirmed with Compliance.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i00018:,,,10004,KAN-5,Access & Verification,To Do,07/Oct/26 4:16 PM,3,Must
+Inactivity session timeout,KAN-15,10014,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 4:28 PM,08/Oct/26 3:00 PM,07/Oct/26 4:29 PM,,,0,"* *User Story:* As a Compliance Liaison, I want customer sessions to end automatically after 5 minutes of inactivity, so that sensitive financial details are protected if a device is left unattended.
+* *Business Value:* Meets banking security expectations and reduces data-exposure risk.
+* *Acceptance Criteria:*
+** When an authenticated customer is inactive for 4 minutes, a modal shows 'Session will timeout in 60 secs' with a countdown.
+** Any customer activity while the modal is showing dismisses it and restarts the inactivity timer.
+** When 5 minutes pass without activity, the session is cleared, no account data remains on screen, and the customer is returned to the verification screen.
+* *Dependencies:* KAN-11.
+* *Priority:* High (Must-have): small, security-driven.
+* *Estimate:* 3 story points
+* *Notes & Assumptions:* Applies to every authenticated screen. Assumption to confirm: a payment already submitted to the gateway is not interrupted by a timeout.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0001c:,,,10004,KAN-5,Access & Verification,To Do,07/Oct/26 4:28 PM,3,Must
+Hardship-flagged accounts diverted from self-service,KAN-16,10015,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 4:53 PM,08/Oct/26 3:00 PM,07/Oct/26 5:26 PM,,,0,"* *User Story:* As a Collections Representative, I want accounts with an active hardship or vulnerability flag to be diverted from self-service after login, so that vulnerable customers receive personal, compliant support.
+* *Business Value:* Protects vulnerable customers and keeps the bank compliant with vulnerable-customer rules.
+* *Acceptance Criteria:*
+** After successful verification, the portal checks the account's hardship/vulnerability flag in the legacy database before showing the dashboard.
+** If the flag is set, no payment, plan or promise-to-pay options are shown, and the message 'Your account requires personal support. Contact a specialist team member on this number.' is displayed with the number.
+** The account is placed in the specialist representative queue with the reason 'pre-existing hardship flag' (KAN-23).
+** If no flag is set, the customer proceeds to the dashboard (KAN-12).
+** The flag check result is written to the audit log (KAN-26).
+* *Dependencies:* KAN-11, KAN-23, KAN-26; hardship flags already set during intake screening.
+* *Priority:* Highest (Must-have): compliance requirement; the workflow places this check before any account data is shown.
+* *Estimate:* 3 story points
+* *Notes & Assumptions:* Single owner of pre-existing flag behaviour; KAN-12 and KAN-21 refer to this story instead of repeating it. Customer-initiated hardship requests are KAN-21.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,KAN-11,,,,{},,0|i0001n:,,,10007,KAN-8,Routing & Exception Handling,To Do,07/Oct/26 4:53 PM,3,Must
+Self-service transaction history,KAN-17,10016,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Medium,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 5:21 PM,08/Oct/26 3:00 PM,08/Oct/26 12:38 PM,,,0,"* *User Story:* As a verified customer, I want to view my recent payments, so that I can confirm my payment progress without a paper statement or email.
+* *Business Value:* Replaces payment-confirmation emails (out of Phase 1 scope) with self-service visibility.
+* *Acceptance Criteria:*
+** When the customer selects View Transaction History, a table lists transactions newest first with date, amount, payment type (Card / Direct Debit) and remaining balance.
+** The table covers up to 12 months of records.
+** If there are no transactions, the message 'No payments recorded in the last 12 months' is shown.
+** A payment made through the portal appears once it has been written to the database (KAN-25).
+* *Dependencies:* KAN-12, KAN-25.
+* *Priority:* Medium (Should-have): the on-screen receipt in KAN-20 is the primary confirmation, so this can follow the core journeys.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* 'Direct Debit' appears as a payment type only once KAN-28 ships.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,KAN-12,,,,{},,0|i0001q:,,,10005,KAN-6,Account Visibility,To Do,07/Oct/26 5:21 PM,5,Should
+Select 3/6/12-month repayment plan,KAN-18,10017,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 5:28 PM,08/Oct/26 3:00 PM,07/Oct/26 5:28 PM,,,0,"* *User Story:* As an overdue customer, I want to choose a 3-, 6- or 12-month repayment plan online, so that I can clear my balance on terms I can afford without negotiating by phone.
+* *Business Value:* Increases recovery through affordable plans and saves representative call time on straightforward cases.
+* *Acceptance Criteria:*
+** Plan options are shown only for accounts flagged portal eligible (KAN-22) with a balance under the automatic-acceptance threshold (value to be confirmed).
+** When the customer selects a duration of 3, 6 or 12 months, the portal calculates and shows equal monthly payments and the total repayable before confirmation.
+** When the customer confirms, the first instalment is taken through the payment gateway using the capability and failure handling in KAN-20.
+** On success, the plan is recorded as a 'repayment arrangement' in the legacy database (KAN-25) and an on-screen summary shows plan length, instalment amount and due dates.
+** If the first payment fails, no plan is recorded and the customer is shown the failure message and alternatives.
+* *Dependencies:* KAN-12, KAN-20, KAN-22, KAN-25; agreed policy threshold for automatic acceptance (open).
+* *Priority:* High (Must-have): core value case, standard plans need no manual sign-off.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* The Direct Debit mandate for later instalments is split out to KAN-28 (Should-have). Until it ships, later instalments are paid by card via the portal and checked by KAN-29. Assumes no interest or fees; confirm.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,KAN-12,,,,{},,0|i00020:,,,10006,KAN-7,PTP / Payment-plan journey,To Do,07/Oct/26 5:28 PM,5,Must
+Digital promise-to-pay capture with timestamp,KAN-19,10018,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,07/Oct/26 5:45 PM,08/Oct/26 3:00 PM,08/Oct/26 9:42 AM,,,0,"* *User Story:* As an overdue customer unable to pay today, I want to set a payment promise date online, so that my account shows a commitment and I am not chased in the meantime.
+* *Business Value:* Captures commitments electronically and stops unrecorded callback promises across shifts.
+* *Acceptance Criteria:*
+** When the customer selects Promise to Pay, they can choose a date from tomorrow up to 30 days ahead and enter an amount greater than 0 and no more than the overdue balance.
+** On submit, an on-screen confirmation shows the promise date and amount.
+** The account is recorded as 'PTP captured' with amount, promise date and UTC timestamp in the legacy database (KAN-25), and is visible to representatives.
+** Promises are accepted automatically for accounts with no hardship or dispute flag.
+* *Dependencies:* KAN-12, KAN-25; KAN-29 checks the promise when it falls due.
+* *Priority:* High (Must-have): headline capability in the To-Be workflow.
+* *Estimate:* 3 story points
+* *Notes & Assumptions:* Maximum term is not agreed: this story says 30 days, an earlier scope draft said up to 6 months. Confirm with Collections Operations. Following up unpaid promises is KAN-29.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,KAN-12,,,,{},,0|i00022:,,,10006,KAN-7,PTP / Payment-plan journey,To Do,07/Oct/26 5:45 PM,3,Must
+One-off full card payment and on-screen receipt,KAN-20,10019,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 11:09 AM,08/Oct/26 3:00 PM,08/Oct/26 11:13 AM,,,0,"* *User Story:* As an overdue customer, I want to pay my full overdue balance by card online, so that I can resolve my account immediately and see proof of payment.
+* *Business Value:* Accelerates cash collection and removes manual payment handling by representatives.
+* *Acceptance Criteria:*
+** When the customer selects Pay Overdue Balance in Full, the full overdue amount is shown (not editable) and card details are entered securely before Submit Payment.
+** The payment is processed through the payment gateway and card details are never stored by the portal.
+** On success, an on-screen receipt shows a unique reference, amount and date, the overdue balance becomes 0.00 GBP, and the new status is written to the database (KAN-25).
+** On a declined payment, a clear message is shown, the balance is unchanged, and the customer can retry with another card, choose another option, or see the support number.
+** On a gateway timeout or error, the portal checks the transaction status before allowing a retry so the customer is not charged twice; unresolved cases show the support number and go to a representative (KAN-23).
+* *Dependencies:* Payment gateway merchant account and integration (owner TBC); KAN-12, KAN-25.
+* *Priority:* High (Must-have): fastest route to recovered cash; largest build item.
+* *Estimate:* 8 story points
+* *Notes & Assumptions:* Phase 1 supports full balance only. Part payments are handled through plans (KAN-18) or promises (KAN-19). Card payment only.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0002b:,,,10006,KAN-7,PTP / Payment-plan journey,To Do,08/Oct/26 11:09 AM,8,Must
+Raise hardship or dispute request from portal,KAN-21,10020,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 11:14 AM,08/Oct/26 3:00 PM,08/Oct/26 11:23 AM,,,0,"* *User Story:* As a customer in financial hardship or disputing my balance, I want to request specialist support on the portal, so that a representative has my details and I do not have to repeat my story.
+* *Business Value:* Protects vulnerable customers and avoids representatives re-asking for information.
+* *Acceptance Criteria:*
+** When the customer selects Request Hardship Support or Dispute Balance, they choose the request type and answer a 3-question context form (questions to be approved by Compliance), then select Submit.
+** On submit, self-service ends for the account and the customer sees a confirmation, what happens next, and the support number.
+** The account is flagged for hardship or dispute in the legacy database (KAN-25).
+** A priority case with the customer's answers is placed in the specialist representative queue (KAN-23).
+** The submission is written to the audit log (KAN-26).
+* *Dependencies:* KAN-12, KAN-23, KAN-25, KAN-26.
+* *Priority:* High (Must-have): compliance and vulnerable-customer safeguard.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Flags are accepted automatically; assessment of the claim is out of Phase 1. Accounts already flagged before login are handled by KAN-16.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0002c:,,,10007,KAN-8,Routing & Exception Handling,To Do,08/Oct/26 11:14 AM,5,Must
+Triage accounts for portal eligibility,KAN-22,10021,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 12:47 PM,08/Oct/26 3:00 PM,08/Oct/26 12:56 PM,,,0,"* *User Story:* As a representative, I want accounts assessed against agreed eligibility rules when they become delinquent, so that straightforward cases use self-service and complex cases come to me.
+* *Business Value:* Lets simple cases be resolved quickly while protecting specialist capacity.
+* *Acceptance Criteria:*
+** When an account enters delinquency, the system assesses it against the eligibility rules agreed with Collections and Compliance.
+** The rules consider at least: hardship or vulnerability flag, open dispute, balance above the automatic-acceptance threshold and product type (illustrative; final list to be confirmed).
+** An eligible account is flagged 'portal eligible' in the legacy database and the customer is notified how to access the portal (channel to be confirmed).
+** An ineligible account is not flagged and is routed to the representative queue with the reason (KAN-23).
+** The outcome and the rule that decided it are written to the audit log (KAN-26).
+* *Dependencies:* Approved eligibility rules (BLOCKER); account data in the legacy database; KAN-23, KAN-25, KAN-26.
+* *Priority:* Highest (Must-have): first step of the To-Be workflow; nothing else starts without it.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Included in Phase 1 scope (rules-based triage). The one-off access notice is separate from the payment-confirmation emails excluded from scope.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0002k:,,,10007,KAN-8,Routing & Exception Handling,To Do,08/Oct/26 12:47 PM,5,Must
+Route complex cases to representatives,KAN-23,10022,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 12:50 PM,08/Oct/26 3:00 PM,08/Oct/26 12:50 PM,,,0,"* *User Story:* As a representative, I want complex, hardship and failed cases routed to me with context, so that I can give appropriate support without starting from scratch.
+* *Business Value:* Makes sure cases that need a human reach the right team.
+* *Acceptance Criteria:*
+** When triage (KAN-22), the hardship check (KAN-16), a hardship/dispute request (KAN-21), failed verification (KAN-14/KAN-27), a write-back failure (KAN-30) or an unpaid promise (KAN-29) needs a person, the account is removed from self-service.
+** The case appears in the standard or specialist queue with account ID, reason code, timestamp and any customer-entered context.
+** The escalation reason is stored against the account in the legacy database.
+* *Dependencies:* KAN-22, KAN-16, KAN-21, KAN-14, KAN-29, KAN-30; queue tooling available to representatives.
+* *Priority:* High (Must-have): the safety net behind every exception path.
+* *Estimate:* 3 story points
+* *Notes & Assumptions:* Queue response-time targets (SLA) are not defined yet; confirm with Collections Operations.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0002z:,,,10007,KAN-8,Routing & Exception Handling,To Do,08/Oct/26 12:50 PM,3,Must
+Escalate unresolved payments to a manager,KAN-24,10023,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Medium,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 12:51 PM,08/Oct/26 3:00 PM,08/Oct/26 12:55 PM,,,0,"* *User Story:* As a representative, I want unpaid or unresolved cases escalated to a manager when necessary, so that they receive appropriate follow-up.
+* *Business Value:* Prevents unresolved accounts being overlooked so more debt is recovered.
+* *Acceptance Criteria:*
+** When a promised or planned payment is not received (flagged by KAN-29), the case appears in my worklist with the reason 'payment not received'.
+** I can record the follow-up outcome and, if unresolved, escalate to a manager with a reason.
+** The escalation (who, when, why) is recorded against the account and in the audit log (KAN-26).
+* *Dependencies:* KAN-29, KAN-23, KAN-26.
+* *Priority:* Medium (Should-have): representatives can follow up manually until this exists.
+* *Estimate:* 3 story points
+* *Notes & Assumptions:* The legal review path after manager escalation is out of Phase 1 scope.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i00036:,,,10007,KAN-8,Routing & Exception Handling,To Do,08/Oct/26 12:51 PM,3,Should
+Sync account status to legacy database,KAN-25,10024,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Highest,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 12:56 PM,08/Oct/26 3:00 PM,08/Oct/26 12:56 PM,,,0,"* *User Story:* As a representative, I want account status changes made on the portal written to the legacy database automatically, so that staff and customers see consistent information without re-keying.
+* *Business Value:* Removes manual re-keying and improves data accuracy and compliance.
+* *Acceptance Criteria:*
+** When a payment is made, a plan is arranged, a promise is captured, a hardship or dispute request is raised, a portal-eligible flag is set or an account is settled, the new status is written to the legacy database with account ID and UTC timestamp.
+** The write completes before the customer sees a final confirmation.
+** The updated status is visible to representatives in existing tools and to the customer on the dashboard (KAN-12) on next load.
+** A failed write is handled as described in KAN-30.
+* *Dependencies:* Write access to the legacy database; KAN-30.
+* *Priority:* Highest (Must-have): the legacy database is the source of truth, so most stories depend on this.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Legacy database stays the source of truth.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0003k:,,,10008,KAN-9,Reporting & Audit Trail,To Do,08/Oct/26 12:56 PM,5,Must
+Record customer and system actions in audit trail,KAN-26,10025,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 12:59 PM,08/Oct/26 3:00 PM,08/Oct/26 1:04 PM,,,0,"* *User Story:* As a compliance or management user, I want key customer and system actions recorded, so that there is a clear, tamper-resistant history of account activity.
+* *Business Value:* Provides an audit trail and the data needed for later reporting and compliance checks.
+* *Acceptance Criteria:*
+** These events are recorded: verification attempts, lockouts and resets, manual ID verification, triage outcome, hardship flag check, payments, plan set-up, promise capture, hardship/dispute requests, escalations and write-back failures.
+** Each record holds account ID, event type, UTC timestamp, actor (customer, system or representative ID) and outcome. Card details and answers entered are not stored.
+** Records are append-only and cannot be edited or deleted by the portal or by staff.
+** Compliance users can retrieve records by account ID and date range.
+* *Dependencies:* Audit table in the legacy database (existence to be confirmed; if missing, a schema change is needed).
+* *Priority:* High (Must-have): compliance control and prerequisite for reporting.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Management reporting dashboards are outside Phase 1; this story captures the data that would feed them.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,0|i0003q:,,,10008,KAN-9,Reporting & Audit Trail,To Do,08/Oct/26 12:59 PM,5,Must
+Manual identity verification by representative,KAN-27,10026,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 3:00 PM,08/Oct/26 3:00 PM,,,,0,"* *User Story:* As a Collections Representative, I want to verify a locked-out customer's identity manually, so that genuine customers can still access help and fraudsters are stopped.
+* *Business Value:* Gives genuine customers a path back into the journey after a lockout.
+* *Acceptance Criteria:*
+** When a lockout case (KAN-14) is in my queue, I can see the account and the failed-attempt history and verify the customer using data from the legacy database.
+** I record the verification attempt and outcome in the legacy database.
+** If verified, the portal lock is reset so the customer can continue to the hardship check (KAN-16) and dashboard.
+** If not verified, the case is escalated to a manager and recorded.
+** Every step is written to the audit log (KAN-26).
+* *Dependencies:* KAN-14, KAN-23, KAN-26.
+* *Priority:* High (Must-have): the To-Be workflow shows this fallback after failed verification.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Manual checks follow the same Compliance verification standard as KAN-11.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,,,,10004,KAN-5,Access & Verification,To Do,08/Oct/26 3:00 PM,5,Must
+Set up Direct Debit mandate for repayment plan,KAN-28,10027,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,Medium,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 3:00 PM,08/Oct/26 3:00 PM,,,,0,"* *User Story:* As a customer on a repayment plan, I want to set up a Direct Debit online, so that my remaining instalments are paid automatically.
+* *Business Value:* Improves plan completion and reduces missed payments.
+* *Acceptance Criteria:*
+** After a plan is confirmed (KAN-18), the portal shows a Direct Debit mandate form (account holder name, sort code, account number).
+** Bank details are format-validated before submission.
+** On submit, the mandate is processed and an on-screen confirmation with mandate reference is shown, and the reference is recorded in the legacy database (KAN-25).
+** If the mandate fails, the customer sees an error and can retry or pay instalments by card.
+* *Dependencies:* KAN-18, KAN-25; Direct Debit provider or gateway support (owner TBC).
+* *Priority:* Medium (Should-have): a heavier build than card payment, so it can follow the core release.
+* *Estimate:* 8 story points
+* *Notes & Assumptions:* Split from the original KAN-18. Not part of the Phase 1 core if the provider is not ready.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,,,,10006,KAN-7,PTP / Payment-plan journey,To Do,08/Oct/26 3:00 PM,8,Should
+Automated payment monitoring for promises and plans,KAN-29,10028,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 3:00 PM,08/Oct/26 3:00 PM,,,,0,"* *User Story:* As a Collections Representative, I want the system to check automatically whether promised and planned payments have arrived, so that I do not have to remember to check manually.
+* *Business Value:* Improves follow-up consistency and cuts manual checking effort.
+* *Acceptance Criteria:*
+** When a promise date or plan instalment due date arrives, the system checks the payment status in the legacy database without staff action.
+** If paid, the status is updated to 'payment settled' or 'instalment received' (KAN-25) and no representative action is needed.
+** If not paid, the account is flagged and routed to the representative queue with the reason 'payment not received' (KAN-23).
+** Each check and its result is written to the audit log (KAN-26).
+* *Dependencies:* KAN-18, KAN-19, KAN-23, KAN-25, KAN-26; a scheduling capability in the portal environment (to be confirmed).
+* *Priority:* High (Must-have): the To-Be workflow depends on this check after the promise timer.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* Grace period before flagging (for example 1 day) is to be confirmed. Added after review: KAN-19 and KAN-24 previously relied on this with no story.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,,,,10006,KAN-7,PTP / Payment-plan journey,To Do,08/Oct/26 3:00 PM,5,Must
+Handle legacy database write-back failure,KAN-30,10029,Story,To Do,KAN,Legacy Bank Portal,software,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,High,,,,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,08/Oct/26 3:00 PM,08/Oct/26 3:00 PM,,,,0,"* *User Story:* As a Collections Representative, I want failed status updates to the legacy database retried and flagged, so that the portal and the source of truth never silently disagree.
+* *Business Value:* Protects data integrity, which the portal depends on because the legacy database is the source of truth.
+* *Acceptance Criteria:*
+** When a write to the legacy database fails, the portal tries the update again automatically before reporting a failure (number of attempts to be confirmed).
+** If all retries fail, the customer sees a neutral message that the request has been received and is being confirmed, with the support number; the portal does not claim a status that was not saved.
+** The failed update is kept and a task with the full details goes to the representative queue for reconciliation (KAN-23).
+** The failure and its resolution are recorded in the audit log (KAN-26).
+* *Dependencies:* KAN-25, KAN-23, KAN-26; a named operational owner for failed write-backs (OPEN: none assigned today).
+* *Priority:* High (Must-have): payments may already be taken when a write fails.
+* *Estimate:* 5 story points
+* *Notes & Assumptions:* The scope document notes there is no owner if write-back fails; one must be named before build.",,Elana Gathinji,712020:621e8290-c844-4a26-9339-67c8d1f30145,,,,,,,,,,,,,{},,,,,10007,KAN-8,Routing & Exception Handling,To Do,08/Oct/26 3:00 PM,5,Must

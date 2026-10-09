@@ -1,6 +1,8 @@
 stakeholder_group,awareness,desire,knowledge,ability,reinforcement,key_risk,mitigation_action,delivery_implication
-Representatives,TODO,TODO,TODO,TODO,TODO,TODO,TODO,Should this become a backlog item or reporting need?
-Team leaders and managers,TODO,TODO,TODO,TODO,TODO,TODO,TODO,Should manager visibility appear in Phase 1?
-Operations leadership,TODO,TODO,TODO,TODO,TODO,TODO,TODO,What evidence will they want after launch?
-Finance,TODO,TODO,TODO,TODO,TODO,TODO,TODO,What keeps the value case credible?
-Product and delivery,TODO,TODO,TODO,TODO,TODO,TODO,TODO,What scope or dependency risk must be controlled?
+Representatives,High - They are aware that the current process is very complex and needs to change,High - They ,TODO,TODO,TODO,TODO,TODO,Should this become a backlog item or reporting need?
+Team leaders and managers,High,TODO,TODO,TODO,TODO,TODO,TODO,Should manager visibility appear in Phase 1?
+Operations leadership,High,TODO,TODO,TODO,TODO,TODO,TODO,What evidence will they want after launch?
+Finance,High,TODO,High,TODO,TODO,TODO,TODO,What keeps the value case credible?
+Product and delivery,High,TODO,TODO,TODO,TODO,TODO,TODO,What scope or dependency risk must be controlled?
+
+

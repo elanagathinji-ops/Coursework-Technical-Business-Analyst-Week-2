@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Legacy Trust Bank | Smart-Recovery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">LT</span> Legacy Trust Bank</div>
+      <div class="header-tools">
+        <span class="secure">Secure session</span>
+        <button id="signout" class="btn link" hidden>Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="wrap steps" aria-label="Progress" id="steps" hidden>
+    <ol>
+      <li data-step="0">Verify identity</li>
+      <li data-step="1">Account overview</li>
+      <li data-step="2">Choose an option</li>
+      <li data-step="3">Confirmation</li>
+    </ol>
+  </nav>
+
+  <main class="wrap" id="main">
+    <div id="alert" class="alert" role="alert" hidden></div>
+
+    <!--
+      Screen 1: Landing page
+      Stories: KAN-22 (eligibility decided before arrival)
+      Data: customer name and demo scenario (demo aid only; real customers arrive by link)
+      Rule: link must be valid; no account data shown
+      Next: Identity verification, or Access locked if the account is locked
+    -->
+    <section class="screen" id="s-start" aria-labelledby="h-start">
+      <h1 id="h-start" tabindex="-1">Manage your overdue account online</h1>
+      <p class="lead">Check what you owe and choose how to resolve it, any time of day. We will ask you to confirm your identity first.</p>
+      <div class="panel demo">
+        <h2>Prototype: open the portal link as a customer</h2>
+        <p class="muted">Demo data only. Each customer shows a different path through the process.</p>
+        <ul class="customers" id="customer-list"></ul>
+        <p class="muted"><a href="staff.html" target="_blank" rel="noopener">Open staff and audit view</a></p>
+      </div>
+    </section>
+
+    <!--
+      Screen 2: Identity verification
+      Stories: KAN-11, KAN-26 (every attempt audited)
+      Data: date of birth, post code, last 4 card digits (no account data shown)
+      Rule: all three must match; error never says which field was wrong; standard is pending Compliance sign-off
+      Next: hardship check then Account summary, a support screen, or Access locked after 3 failures
+    -->
+    <section class="screen" id="s-verify" aria-labelledby="h-verify" hidden>
+      <h1 id="h-verify" tabindex="-1">Confirm your identity</h1>
+      <p class="lead">For your security, we need three details before we show any account information.</p>
+      <form id="verify-form" class="panel" novalidate>
+        <label>Date of birth<input type="date" id="v-dob" required autocomplete="off"></label>
+        <label>Post code<input type="text" id="v-postcode" required autocomplete="off" maxlength="8"></label>
+        <label>Last 4 digits of your registered payment card
+          <input type="text" id="v-last4" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off"></label>
+        <button class="btn primary" type="submit">Continue</button>
+      </form>
+      <p class="panel demo muted" id="verify-hint"></p>
+    </section>
+
+    <!--
+      Screen 3: Access locked
+      Stories: KAN-14, KAN-23
+      Data: support number, time access reopens
+      Rule: 3 consecutive failed verifications lock access for 60 minutes; lock is audited
+      Next: end of journey; case goes to the representative queue
+    -->
+    <section class="screen" id="s-locked" aria-labelledby="h-locked" hidden>
+      <h1 id="h-locked" tabindex="-1">Access is temporarily locked</h1>
+      <p class="lead">To protect your account, online access is locked for 60 minutes after 3 unsuccessful attempts.</p>
+      <div class="panel notice">
+        <p>Call us on <strong class="support-number"></strong> and a team member will help you right away.</p>
+        <p class="muted" id="lock-until"></p>
+      </div>
+    </section>
+
+    <!--
+      Screen 4: Specialist support (hardship or vulnerability flag)
+      Stories: KAN-16, KAN-23
+      Data: specialist contact message and support number only
+      Rule: runs after verification; all payment options are suppressed for flagged accounts
+      Next: end of journey; sign out
+    -->
+    <section class="screen" id="s-specialist" aria-labelledby="h-specialist" hidden>
+      <h1 id="h-specialist" tabindex="-1">We would like to help you personally</h1>
+      <div class="panel notice">
+        <p>Your account requires personal support. Contact a specialist team member on <strong class="support-number"></strong>.</p>
+      </div>
+      <button class="btn secondary" data-action="signout">Sign out</button>
+    </section>
+
+    <!--
+      Screen 5: Routed to representative (unsupported case)
+      Stories: KAN-22, KAN-23
+      Data: support number only
+      Rule: shown when the account has an open dispute or failed triage (balance 5,000 or more, or 60+ days overdue)
+      Next: end of journey; sign out
+    -->
+    <section class="screen" id="s-rep" aria-labelledby="h-rep" hidden>
+      <h1 id="h-rep" tabindex="-1">Please speak to our team</h1>
+      <div class="panel notice">
+        <p>We can't show options for this account online. A team member will help you on <strong class="support-number"></strong>.</p>
+      </div>
+      <button class="btn secondary" data-action="signout">Sign out</button>
+    </section>
+
+    <!--
+      Screen 6: Account summary and choose next action
+      Stories: KAN-12 (options lead to KAN-20, KAN-18, KAN-19, KAN-21)
+      Data: overdue balance, product, days overdue, total balance, status, active plan or promise
+      Rule: read live from the database; plan and promise hidden while one is active; pay hidden at zero balance
+      Next: Pay in full, Repayment plan, Promise to pay, or Hardship/dispute request
+    -->
+    <section class="screen" id="s-dashboard" aria-labelledby="h-dashboard" hidden>
+      <h1 id="h-dashboard" tabindex="-1">Hello, <span id="d-name"></span></h1>
+      <div class="panel balance">
+        <div>
+          <p class="muted">Overdue balance</p>
+          <p class="amount" id="d-overdue"></p>
+        </div>
+        <dl class="facts">
+          <div><dt>Product</dt><dd id="d-product"></dd></div>
+          <div><dt>Days overdue</dt><dd id="d-days"></dd></div>
+          <div><dt>Total balance</dt><dd id="d-total"></dd></div>
+          <div><dt>Status</dt><dd id="d-status"></dd></div>
+        </dl>
+      </div>
+      <div class="panel" id="d-current" hidden></div>
+      <h2>How would you like to resolve this?</h2>
+      <div class="options" id="d-options">
+        <button class="option" data-go="s-pay" id="opt-pay"><strong>Pay in full</strong><span>Pay your overdue balance now by card</span></button>
+        <button class="option" data-go="s-plan" id="opt-plan"><strong>Set up a repayment plan</strong><span>Spread it over 3, 6 or 12 months</span></button>
+        <button class="option" data-go="s-ptp" id="opt-ptp"><strong>Promise to pay later</strong><span>Choose a date up to 30 days ahead</span></button>
+        <button class="option" data-go="s-help" id="opt-help"><strong>Hardship or dispute</strong><span>Ask for help from a specialist</span></button>
+      </div>
+    </section>
+
+    <!--
+      Screen 7: Pay in full
+      Stories: KAN-20, KAN-25, KAN-26
+      Data: full overdue amount (not editable), card details (never stored)
+      Rule: full balance only; card is validated; decline or gateway error leaves the balance unchanged and allows retry
+      Next: Confirmation, or stay here with an error message
+    -->
+    <section class="screen" id="s-pay" aria-labelledby="h-pay" hidden>
+      <h1 id="h-pay" tabindex="-1">Pay your overdue balance in full</h1>
+      <form id="pay-form" class="panel" novalidate>
+        <p>Amount to pay: <strong class="amount-sm" id="pay-amount"></strong></p>
+        <div class="card-fields"></div>
+        <div class="actions">
+          <button type="button" class="btn secondary" data-go="s-dashboard">Back</button>
+          <button class="btn primary" type="submit">Submit payment</button>
+        </div>
+      </form>
+    </section>
+
+    <!--
+      Screen 8: Repayment plan
+      Stories: KAN-18, KAN-20 (first instalment), KAN-25
+      Data: plan length, monthly amount, total repayable, schedule, card details (never stored)
+      Rule: 3, 6 or 12 months only; equal instalments; no plan is recorded if the first payment fails
+      Next: Confirmation
+    -->
+    <section class="screen" id="s-plan" aria-labelledby="h-plan" hidden>
+      <h1 id="h-plan" tabindex="-1">Choose a repayment plan</h1>
+      <form id="plan-form" class="panel" novalidate>
+        <fieldset>
+          <legend>Plan length</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="months" value="3"> 3 months</label>
+            <label class="choice"><input type="radio" name="months" value="6"> 6 months</label>
+            <label class="choice"><input type="radio" name="months" value="12"> 12 months</label>
+          </div>
+        </fieldset>
+        <div id="plan-preview" hidden>
+          <p>Equal monthly payments of about <strong id="plan-instalment"></strong>. Total repayable: <strong id="plan-total"></strong>.</p>
+          <ol class="schedule" id="plan-schedule"></ol>
+          <p class="muted">Your first instalment is taken now by card. Later instalments are due on the dates shown.</p>
+          <div class="card-fields"></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn secondary" data-go="s-dashboard">Back</button>
+          <button class="btn primary" type="submit" id="plan-submit" disabled>Confirm plan and pay first instalment</button>
+        </div>
+      </form>
+    </section>
+
+    <!--
+      Screen 9: Promise to pay
+      Stories: KAN-19, KAN-25, KAN-29 (checked when the date arrives)
+      Data: promise date, promise amount
+      Rule: date from tomorrow to 30 days ahead; amount above 0 and no more than the overdue balance; stored with UTC timestamp
+      Next: Confirmation
+    -->
+    <section class="screen" id="s-ptp" aria-labelledby="h-ptp" hidden>
+      <h1 id="h-ptp" tabindex="-1">Promise to pay</h1>
+      <form id="ptp-form" class="panel" novalidate>
+        <label>Date you will pay<input type="date" id="ptp-date" required></label>
+        <label>Amount you will pay (GBP)<input type="number" id="ptp-amount" step="0.01" min="0.01" required></label>
+        <p class="muted">Choose a date from tomorrow up to 30 days ahead.</p>
+        <div class="actions">
+          <button type="button" class="btn secondary" data-go="s-dashboard">Back</button>
+          <button class="btn primary" type="submit">Confirm promise</button>
+        </div>
+      </form>
+    </section>
+
+    <!--
+      Screen 10: Hardship or dispute request
+      Stories: KAN-21, KAN-23, KAN-25, KAN-26
+      Data: request type and three answers (answers go to the specialist queue, not the audit log)
+      Rule: all three answers required; flags the account and ends self-service
+      Next: Confirmation (no return to Account summary)
+    -->
+    <section class="screen" id="s-help" aria-labelledby="h-help" hidden>
+      <h1 id="h-help" tabindex="-1">Ask for specialist help</h1>
+      <form id="help-form" class="panel" novalidate>
+        <fieldset>
+          <legend>What would you like to tell us about?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="type" value="hardship" checked> Financial hardship</label>
+            <label class="choice"><input type="radio" name="type" value="dispute"> Dispute my balance</label>
+          </div>
+        </fieldset>
+        <label><span id="q1-label"></span><input type="text" id="q1" maxlength="500" required></label>
+        <label><span id="q2-label"></span><input type="text" id="q2" maxlength="500" required></label>
+        <label><span id="q3-label"></span><textarea id="q3" maxlength="500" rows="3" required></textarea></label>
+        <p class="muted">Online options will stop for this account and a specialist will contact you.</p>
+        <div class="actions">
+          <button type="button" class="btn secondary" data-go="s-dashboard">Back</button>
+          <button class="btn primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
+
+    <!--
+      Screen 11: Confirmation or next steps (on-screen receipt)
+      Stories: KAN-20, KAN-18, KAN-19, KAN-21
+      Data: reference number, amount, card last 4, dates, remaining balance
+      Rule: shown only after the database write succeeds; no email is sent
+      Next: Account summary (not after a hardship/dispute request), or sign out
+    -->
+    <section class="screen" id="s-receipt" aria-labelledby="h-receipt" hidden>
+      <div class="tick" aria-hidden="true">&#10003;</div>
+      <h1 id="h-receipt" tabindex="-1"></h1>
+      <div class="panel">
+        <dl class="facts" id="receipt-facts"></dl>
+        <p class="muted" id="receipt-note"></p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="receipt-dashboard" data-go="s-dashboard">Back to my account</button>
+        <button class="btn secondary" data-action="signout">Sign out</button>
+      </div>
+    </section>
+
+    <!--
+      Screen 12: Session ended
+      Stories: KAN-15
+      Data: none
+      Rule: session clears after 5 minutes without activity; the 4-minute warning is the modal below
+      Next: Landing page
+    -->
+    <section class="screen" id="s-expired" aria-labelledby="h-expired" hidden>
+      <h1 id="h-expired" tabindex="-1">Your session has ended</h1>
+      <p class="lead">For your security we signed you out after a period of inactivity. Nothing was changed on your account.</p>
+      <button class="btn primary" data-action="restart">Start again</button>
+    </section>
+  </main>
+
+  <div class="modal" id="timeout-modal" role="alertdialog" aria-modal="true" aria-labelledby="t-title" hidden>
+    <div class="modal-box">
+      <h2 id="t-title">Are you still there?</h2>
+      <p id="t-text" aria-live="assertive"></p>
+      <button class="btn primary" id="t-stay">Stay signed in</button>
+    </div>
+  </div>
+
+  <footer class="wrap site-footer">
+    <p>Prototype with demo data only. Confirmations appear on screen; keep your reference number. Legacy Trust Bank is a fictional bank.</p>
+  </footer>
+
+  <script src="mock-api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

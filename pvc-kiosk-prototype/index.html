@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PVC Check-in Kiosk Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="kiosk">
+    <header class="brand">
+      <span class="brand-mark" aria-hidden="true">&#128062;</span>
+      <span>Pritzki Veterinary Clinic</span>
+    </header>
+
+    <!-- 1. Welcome -->
+    <section class="screen active" id="welcome">
+      <h1>Welcome to PVC</h1>
+      <p class="lead">Arriving for an appointment today? Check in here in under a minute.</p>
+      <button class="btn primary" data-goto="phone">Check in</button>
+    </section>
+
+    <!-- 2. Phone lookup -->
+    <section class="screen" id="phone">
+      <h1>Enter your phone number</h1>
+      <p class="lead">Use the number you gave when booking.</p>
+      <div class="phone-display" id="phone-display" aria-live="polite"></div>
+      <div class="keypad" role="group" aria-label="Number keypad">
+        <button class="key" data-key="1">1</button>
+        <button class="key" data-key="2">2</button>
+        <button class="key" data-key="3">3</button>
+        <button class="key" data-key="4">4</button>
+        <button class="key" data-key="5">5</button>
+        <button class="key" data-key="6">6</button>
+        <button class="key" data-key="7">7</button>
+        <button class="key" data-key="8">8</button>
+        <button class="key" data-key="9">9</button>
+        <button class="key util" data-key="clear">Clear</button>
+        <button class="key" data-key="0">0</button>
+        <button class="key util" data-key="back" aria-label="Delete last digit">&#9003;</button>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" data-goto="welcome">Back</button>
+        <button class="btn primary" id="lookup" disabled>Find my appointment</button>
+      </div>
+      <p class="demo-hint">
+        Prototype numbers:
+        <code>07700 900101</code> (Bella, 10:30) &middot;
+        <code>07700 900102</code> (Milo, 11:00) &middot;
+        <code>07700 900103</code> (no appointment today) &middot;
+        any other number (not found)
+      </p>
+    </section>
+
+    <!-- 3. Confirm pet and time -->
+    <section class="screen" id="confirm">
+      <h1>Hello, <span id="c-owner"></span></h1>
+      <p class="lead">Is this the right appointment?</p>
+      <dl class="card">
+        <div><dt>Pet</dt><dd id="c-pet"></dd></div>
+        <div><dt>Time today</dt><dd id="c-time"></dd></div>
+        <div><dt>Reason</dt><dd id="c-reason"></dd></div>
+      </dl>
+      <div class="actions">
+        <button class="btn secondary" data-goto="phone">No, go back</button>
+        <button class="btn primary" data-goto="instructions">Yes, that's right</button>
+      </div>
+    </section>
+
+    <!-- 4. Pre-appointment instructions -->
+    <section class="screen" id="instructions">
+      <h1>You're checked in</h1>
+      <p class="lead">Before you see the vet for <strong id="i-pet"></strong>:</p>
+      <ul class="steps">
+        <li>Please take a seat in the waiting area.</li>
+        <li>Keep your pet on a lead or in a carrier at all times.</li>
+        <li>Keep dogs and cats apart from other animals.</li>
+        <li>A team member will call <strong id="i-pet-2"></strong>'s name shortly.</li>
+      </ul>
+      <button class="btn primary" data-goto="done">Done</button>
+    </section>
+
+    <!-- 5. Complete -->
+    <section class="screen" id="done">
+      <div class="tick" aria-hidden="true">&#10003;</div>
+      <h1>Thank you</h1>
+      <p class="lead">We've let the team know you're here for your <span id="d-time"></span> appointment.</p>
+      <button class="btn secondary" data-goto="welcome">Start over (prototype)</button>
+    </section>
+
+    <!-- Exception: no appointment / not found -->
+    <section class="screen" id="reception">
+      <div class="notice" aria-hidden="true">&#128075;</div>
+      <h1>Please speak to reception</h1>
+      <p class="lead">We couldn't find an appointment booked for today with that number. Our team will be happy to help.</p>
+      <div class="actions">
+        <button class="btn secondary" data-goto="phone">Try another number</button>
+        <button class="btn primary" data-goto="welcome">Finish</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
